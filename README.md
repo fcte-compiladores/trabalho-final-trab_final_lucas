@@ -1,79 +1,94 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/Hppw7Zh2)
-# Trabalho Final
+# Interpretador Micro-C em Python
 
-## Escopo e organização
+**Integrante**: Lucas Chaves Itacaramby - 231026456 - Turma 02
 
-O trabalho é de tema livre dentro do escopo da disciplina de compiladores e
-consiste no desenvolvimento de alguma aplicação na área da disciplina (um
-interpretador para uma linguagem simples, compilador, analisadores de código,
-etc.)
+## Micro-C
 
-O trabalho pode ser feito em grupos de até 4 pessoas.
+* `Micro-C` é um **subconjunto** da `linguagem padrão C`, funcionando como uma versão simplificada da mesma.
+  * A linguagem inclue:
+    * tipos de dados `int`, `bool` e `void`
+    * **declaração de variáveis** (`int x;`)
+    * **inicialização de variáveis** (`int x = 5;`)
+    * **variáveis globais** (variáveis criadas fora de funções)
+    * operadores **Aritméticos** (`+`, `-`, `*`, `/`), **Relacionais** (`<`, `>`, `<=`, `>=`, `==` `!=`), e **Lógicos** (`&&`, `||`, `!`)
+    * estruturas **Condicionais** (`if`/`else`), **Loops** (`while`) e **Funções**
+* Acesse a gramática de `Micro-C` utilizada no projeto pelo link abaixo
+  * Aqui a gramática `Micro-C` -> [click here!](MicroC/grammar.lark)
 
-## Estrutura
+## Instalacão
 
-Os trabalhos devem ser entregues na atividade própria no [github-classrrom](...).
-Cada repositório deve ter uma estrutura parecida com a delineada abaixo:
+* certifique-se de baixar os pré-requisitos!
+    ```bash
+    // primeiro Instale o uv
+    pip install uv
+    // por ultimo baixe as dependencias
+    uv run MicroC
 
-* **README:** o arquivo README.md na base do repositório deve descrever os
-  detalhes da implementação do código. O README deve ter algumas seções 
-  obrigatórias:
-  - **Título**: nome do projeto
-  - **Integrantes**: lista com os nomes, matrículas e turma de cada integrante.
-  - **Introdução**: deve detalhar o que o projeto implementou, quais foram as
-    estratégias e algoritmos relevantes. Se o projeto implementa uma linguagem
-    não-comum ou um subconjunto de uma linguagem comum, deve conter alguns
-    exemplos de comandos nesta linguagem, descrendo a sua sintaxe e semântica,
-    quando necessário.
-  - **Instalação**: deve detalhar os passos para instalar as dependências e
-    rodar o código do projeto. Pode ser algo simples como *"Rode
-    `uv run lox hello.lox` para executar o interpretador."*, se a linguagem de
-    implementação permitir este tipo de facilidade.
+    // após isso, para executar o interpretador use
+    uv run MicroC nome_do_arquivo.mc
+    ```
 
-    Você pode usar gerenciadores de pacotes específicos de linguagens populares
-    como uv, npm, cargo, etc, containers Docker/Podman, ou `.nix`.
-  - **Exemplos**: o projeto deve conter uma pasta "exemplos" com alguns arquivos
-    na linguagem de programação implementada. Deve conter exemplos com graus
-    variáveis de complexidade. Algo como: hello world, fibonacci, função
-    recursiva, alguma estrutura de dados e para finalizar um algoritmo um pouco
-    mais elaborado como ordenamento de listas, busca binária, etc.
-    
-    Note que isto é apenas um guia da ordem de dificuldade dos problemas.
-    Algumas linguagens sequer permitem a implementação de alguns dos exemplos
-    acima.
-  - **Referências**: descreva as referências que você utilizou para a
-    implementação da linguagem. Faça uma breve descrição do papel de cada
-    referência ou como ela foi usada no projeto. Caso você tenha usado algum 
-    código existente como referência, descreva as suas contribuições originais
-    para o projeto.
-  - **Estrutura do código**: faça uma descrição da estrutura geral do código
-    discutindo os módulos, classes, estruturas de dados ou funções principais. 
-    Explicite onde as etapas tradicionais de compilação (análise léxica, 
-    sintática, semântica, etc) são realizadas, quando relevante.
-  - **Bugs/Limitações/problemas conhecidos**: discuta as limitações do seu
-    projeto e problemas conhecidos e coisas que poderiam ser feitas para
-    melhorá-lo no futuro. Note: considere apenas melhorias incrementais e não
-    melhorias grandes como: "reimplementar tudo em Rust".
-* **Código:** O codigo fonte deve estar presente no repositório principal junto com
-  a declaração das suas dependências. Cada linguagem possui um mecanismo
-  específico para isso, mas seria algo como o arquivo pyproject.toml em Python
-  ou package.json no caso de Javascript.
+* caso queira mais informações na execução do código, utilize:
+    ```bash
+    uv run MicroC nome_do_arquivo.mc // execução padrão
+    uv run MicroC -c nome_do_arquivo.mc // árvore sintática concreta (cst)
+    uv run MicroC -t nome_do_arquivo.mc // árvore sintática abstrata (ast)
+    ```
 
-## Critérios
+## Exemplos
 
-Cada trabalho começa com 100% e pode receber penalizações ou bônus de acordo com
-os critérios abaixo:
+* a pasta `exemplos` possui cerca de 5 arquivos `.mc` na linguagem de programação implementada
+    ```bash
+    exemplos
+    ├── fun_escopo.mc
+    ├── fun_example.mc
+    ├── if.mc
+    ├── var_global.mc
+    ├── while.mc
+    ```
 
-- Ausência do README: -50%
-- Instruções de instalação não funcionam: até -20%
-- Referências não atribuídas ou falta de referâncias: -10%
-- Código confuso ou mal organizado: até -15%
-- Falta de clareza em apresentar as técnicas e etapas de compilação: -15%
-- Bugs e limitações sérias na implementação: até -25%
-- Escopo reduzido, ou implementação insuficiente: até 25%
-- Uso de código não atribuído/plágio: até -100%
-- Repositório bem estruturado e organizado: até 10%
-- Linguagem com conceitos originais/interessantes: até +15%
-- Testes unitários: até +15%, dependendo da cobertura
+## Referências usadas no Projeto
 
-Após aplicar todos os bônus, a nota é truncada no intervalo 0-100%. 
+* **documentação do Lark**: a biblioteca Lark foi fundamental para a implementação do analisador léxico e sintático. A documentação oficial foi usada para aprender sobre definição de gramáticas, criação de transformadores e manipulação de árvores sintáticas
+
+* **material didático da disciplina**: o código do interpretador lox para python utilizado durante a matéria serviu de base para a estrutura geral do interpretador, especialmente na separação das etapas de análise e execução
+
+* **projetos open-source similares**: foram consultados repositórios públicos de interpretadores de linguagens simples em Python para entender padrões de organização de código e boas práticas, a lógica de execução, ast e integração foi desenvolvida do zero para este projeto.
+
+## Estrutura do Código
+
+* o projeto está organizado no diretório MicroC, com os seguintes módulos principais:
+    * `grammar.lark`: define a gramática da linguagem `Micro-C`, especificando regras léxicas e sintáticas
+    * `parser.py`: responsável por carregar a gramática e realizar a análise sintática, transformando o código-fonte em uma árvore sintática concreta (cst)
+    * `transformer.py`: converte a cst em uma árvore sintática abstrata (ast), instanciando objetos das classes definidas em `ast.py`
+    * `ast.py`: define as classes da ast, como `Program`, `VarDecl`, `FunDecl`, `IfStmt`, `WhileStmt`, `Assign`, `BinOp`, entre outras. Cada classe possui um método `eval` para execução
+    * `node.py`: implementa o interpretador, visitando os nós da ast e executando o programa. Gerencia escopos, funções, variáveis e operadores
+    * `ctx.py`: implementa a estrutura de contexto (escopo de variáveis), permitindo variáveis locais e globais
+    * `errors.py`: define exceções para erros semânticos e de controle de fluxo (como retorno de função)
+    * `cli.py`: implementa a interface de linha de comando, permitindo executar o interpretador, imprimir a ast ou cst
+    * `__init__.py` e `__main__.py`: pontos de entrada do pacote, facilitando a execução via terminal
+
+* etapas de compilação:
+    * **análise léxica e sintática**: realizadas pelo Lark, usando a gramática em `grammar.lark` e o parser em `parser.py`
+    * **análise semântica e execução**: realizadas durante a transformação da cst para ast (`transformer.py`) e principalmente na execução dos nós da ast pelo interpretador (`node.py`)
+
+## Bugs/Limitações/problemas conhecidos
+
+* **mensagens de erro**: as mensagens de erro sintático e semântico ainda são simples e poderiam ser mais informativas, indicando linha/coluna e contexto do erro
+
+* **cobertura de tipos**: apenas os tipos `int` e `bool` são suportados. O tipo `void` existe apenas para funções sem retorno, não sendo possível declarar variáveis desse tipo
+
+* **funções**: não há suporte para funções aninhadas ou recursão profunda, podendo ocorrer problemas de stack overflow em casos extremos
+
+* **entrada/saída**: apenas a função `print` está disponível para saída. Não há suporte para entrada de dados do usuário
+
+* **verificação de tipos**: a verificação de tipos é feita em tempo de execução, não havendo checagem estática de tipos
+
+* **expressões complexas**: algumas construções sintáticas mais avançadas da linguagem C não são suportadas (ex: ponteiros, structs, arrays)
+
+* **possíveis melhorias incrementais**:
+    * Melhorar as mensagens de erro e adicionar mais testes.
+    * Implementar suporte a arrays e funções recursivas.
+    * Adicionar checagem estática de tipos.
+    * Permitir entrada de dados do usuário.
+    * Refatorar o código para facilitar a extensão da linguagem com novos recursos.
